@@ -18,11 +18,11 @@ public class App {
         this.name = name;
     }
 
-    public LocalDate getAge() {
+    public LocalDate getDeadline() {
         return deadline;
     }
 
-    public void setAge(LocalDate deadline) {
+    public void setDeadline(LocalDate deadline) {
         this.deadline = deadline;
     }
 
