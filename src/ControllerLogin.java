@@ -16,8 +16,6 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import com.mysql.cj.protocol.Resultset;
-import com.mysql.cj.xdevapi.Result;
 
 public class ControllerLogin {
 
@@ -50,7 +48,7 @@ public class ControllerLogin {
                 rs = pst.executeQuery();
 
                 if (rs.next()){
-                    Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("SystemTaskManagement.fxml"));
                     Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
                     Scene scene = new Scene(root);
                     stage.setScene(scene);

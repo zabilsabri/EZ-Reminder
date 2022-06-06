@@ -33,6 +33,15 @@ public class ControllerSignUp {
     private TextField UsernameSU;
 
     @FXML
+    void login(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("loginScene.fxml"));
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
     void signUp(ActionEvent event) throws IOException {
         String uName = UsernameSU.getText();
         String pWord = PasswordSU.getText();

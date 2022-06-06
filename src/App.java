@@ -4,6 +4,7 @@ public class App {
 
     private String name;
     private LocalDate deadline;
+    private String details;
 
     public App(String name, LocalDate deadline) {
         this.name = name;
@@ -24,6 +25,14 @@ public class App {
 
     public void setDeadline(LocalDate deadline) {
         this.deadline = deadline;
+    }
+
+    public String getDetails(){
+        return details;
+    }
+
+    public void setDetails(String details){
+        this.details = details;
     }
 
 }
