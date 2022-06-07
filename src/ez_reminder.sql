@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 06 Jun 2022 pada 14.25
--- Versi server: 10.4.22-MariaDB
--- Versi PHP: 8.1.1
+-- Waktu pembuatan: 07 Jun 2022 pada 16.31
+-- Versi server: 10.4.19-MariaDB
+-- Versi PHP: 8.0.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,14 +33,6 @@ CREATE TABLE `student_info` (
   `Password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data untuk tabel `student_info`
---
-
-INSERT INTO `student_info` (`id`, `Username`, `Password`) VALUES
-(1, 'Zabil Sabri Muhammad', 'zsm100503'),
-(3, 'Muhammad Al', 'testing');
-
 -- --------------------------------------------------------
 
 --
@@ -50,8 +42,9 @@ INSERT INTO `student_info` (`id`, `Username`, `Password`) VALUES
 CREATE TABLE `task_list` (
   `task_id` int(11) NOT NULL,
   `taskName` varchar(100) NOT NULL,
-  `taskDeadline` int(11) NOT NULL,
-  `std_id` int(11) NOT NULL
+  `taskDeadline` varchar(100) NOT NULL,
+  `taskDetails` varchar(1000) NOT NULL,
+  `std_name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -78,7 +71,7 @@ ALTER TABLE `task_list`
 -- AUTO_INCREMENT untuk tabel `student_info`
 --
 ALTER TABLE `student_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `task_list`
