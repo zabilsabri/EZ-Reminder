@@ -22,6 +22,7 @@ public class ControllerLogin {
     Connection con;
     PreparedStatement pst;
     ResultSet rs;
+    Parent root;
 
     @FXML
     private PasswordField passWordF;
@@ -48,7 +49,14 @@ public class ControllerLogin {
                 rs = pst.executeQuery();
 
                 if (rs.next()){
-                    Parent root = FXMLLoader.load(getClass().getResource("SystemTaskManagement.fxml"));
+                    //Parent root = FXMLLoader.load(getClass().getResource("SystemTaskManagement.fxml"));
+
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("SystemTaskManagement.fxml"));
+                    root = loader.load();
+
+                    Controller sceneController = loader.getController();
+                    sceneController.takeName(uName);
+
                     Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
                     Scene scene = new Scene(root);
                     stage.setScene(scene);

@@ -1,3 +1,4 @@
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -45,7 +46,7 @@ public class Controller implements Initializable {
     private DatePicker deadLineInput;
 
     @FXML
-    private TableColumn<App, Integer> deadlinecol;
+    private TableColumn<App, String> deadlinecol;
 
     @FXML
     private Label detailsD;
@@ -77,6 +78,12 @@ public class Controller implements Initializable {
     @FXML
     private Color x4;
 
+    String uName;
+
+    public void takeName(String uName){
+        this.uName = uName;
+    }
+
     @FXML
     void input(ActionEvent event) {
         String mataKuliah = mataKuliahInput.getText();
@@ -91,12 +98,13 @@ public class Controller implements Initializable {
                 con = DriverManager.getConnection("jdbc:mysql://localhost/ez_reminder", "root", "");
 
                 
-                    pst = con.prepareStatement("Insert task_list (taskName, taskDeadline, taskDetails, std_id) values (?, ?, ?, 1)");
+                    pst = con.prepareStatement("Insert task_list (taskName, taskDeadline, taskDetails, std_name) values (?, ?, ?, ?)");
                     Date date = Date.valueOf(deadLine);
 
                     pst.setString(1, mataKuliah);
                     pst.setDate(2, date);
                     pst.setString(3, details);
+                    pst.setString(4, uName);
 
                     int rs = pst.executeUpdate();
                 
@@ -114,9 +122,24 @@ public class Controller implements Initializable {
         table.getItems().remove(selectedID);
     }
 
+    ObservableList<App> oblist = FXCollections.observableArrayList();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        mataKuliahcol.setCellValueFactory(new PropertyValueFactory<App, String>("name"));
-        deadlinecol.setCellValueFactory(new PropertyValueFactory<App, Integer>("deadline"));
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost/ez_reminder", "root", "");
+            ResultSet rs = con.createStatement().executeQuery("select * from task_list");
+
+            while(rs.next()){
+                oblist.add(new App(rs.getString("taskName"), rs.getString("taskDeadline")));
+            }
+
+        } catch (SQLException e) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+        mataKuliahcol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        deadlinecol.setCellValueFactory(new PropertyValueFactory<>("deadline"));
+        table.setItems(oblist);
     }
 }
